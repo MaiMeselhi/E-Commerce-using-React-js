@@ -13,6 +13,9 @@ export default {
       colors:{
         "main":"#0aad0a"
       },
+      container : {
+        center :true
+      },
     },
   },
   plugins: [flowbitePlugin],
