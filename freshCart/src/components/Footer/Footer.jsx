@@ -5,7 +5,7 @@ export default function Footer() {
   useEffect
     const [count,setCount] = useState (0)  
   return (
-    <footer className='bg-[rgb(242,242,242)]   w-screen p-6'>
+    <footer className='bg-[rgb(242,242,242)]  bottom-0  w-screen p-6'>
       <div className="container w-full">
         <h2 className='text-2xl text-[#212529]'>Get The freshCart App</h2>
         <p className='text-[#6d767e] mb-4 font-light'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, repellat?</p>
