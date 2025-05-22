@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Register.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from 'axios';
+import {ClipLoader} from 'react-spinners'
+import {useNavigate} from 'react-router-dom'
 
 export default function Register() {
+
+  let [isCallingAPI,setIsCallingAPI] = useState(false)
+  let [apiError,setApiError] = useState(null)
+  let navigate =useNavigate()
+
   const initialValues = {
     name: "",
     email: "",
@@ -32,15 +40,35 @@ export default function Register() {
   const registerForm = useFormik({
     initialValues,
     validationSchema, 
-    onSubmit: (values) => {
-      console.log(values, "Submitted from register");
-    },
+    onSubmit: callRegister
   });
+
+  {/* call register API */}
+async function callRegister(values) {
+  try {
+    setIsCallingAPI(true);
+    setApiError(null)
+    let { data } = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup', values);
+    console.log(data);
+            navigate("/login")
+
+  } catch (error) {
+    setApiError(error.response.data.message);
+  } finally {
+    setIsCallingAPI(false);
+
+  }
+}
+
+
 
   return (
     <form className="w-[50%] mx-auto" onSubmit={registerForm.handleSubmit}>
       <h1 className="text-4xl text-gray-600 mb-5 text-center">Register Now</h1>
-
+        {/* API Error */}
+   {apiError ? <div className="p-2 mt-2 text-sm text-red-800 bg-red-100 rounded">
+            {apiError} </div> : ''
+        }
       {/* Name */}
       <div className="mb-6 mx-4">
         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
@@ -150,16 +178,23 @@ export default function Register() {
           </div>
         )}
       </div>
-
-      {/* Submit Button */}
-      <div className="flex justify-center my-5">
+      {isCallingAPI ?   
+          <div>
+          <ClipLoader color="#0aad0a"/>
+          </div>
+          :  
+         <div className="flex justify-center my-5">
         <button
           type="submit"
+          disabled={isCallingAPI}
           className="w-[30%] text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-4 text-center"
         >
           Register
         </button>
-      </div>
+      
+      </div>}
+        
+   
     </form>
   );
 }

@@ -1,0 +1,9 @@
+https://ecommerce.routemisr.com/api/v1/auth/signup
+
+{
+  "email": "mairadwan@gmail.com",
+  "name": "mai radwan",
+  "password": "Test",
+  "rePassword": "Test",
+  "phone": "01568874784"
+}
