@@ -10,7 +10,8 @@ export default function LayOut() {
   return (
     <div>
 <NavBar/> 
-<Outlet></Outlet>
+<div className="container"><Outlet></Outlet>
+</div>
 <Footer/>
    </div>
   )

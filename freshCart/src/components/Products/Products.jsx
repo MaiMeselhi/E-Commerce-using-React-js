@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Products.module.css'
+import { counterContext } from '../Context/CounterContext'
 
 export default function Products() {
   useEffect
-    const [count,setCount] = useState (0)  
+    let {setCount} = useContext(counterContext)  
+    function changeCount (){
+      setCount(Math.random()*100)
+    }
   return (
     <div>
-      Products
+      <button onClick={changeCount} className='bg-danger'> Add To Cart </button>
     </div>
   )
 }

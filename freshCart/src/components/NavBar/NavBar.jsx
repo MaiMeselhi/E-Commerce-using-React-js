@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import logo from '../../assets/images/freshcart-logo.svg';
 import { NavLink } from 'react-router-dom';
-
+import {counterContext} from '../Context/CounterContext'
+import { tokenContext } from '../Context/TokenContext';
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  let x =useContext(counterContext)
+  let {token} = useContext(tokenContext)
+  console.log(token , "token from Navbar");
+  
+  console.log(x,"context")
   return (
     <nav className="bg-white border-gray-200">
       <div className="max-w-screen-xl mx-auto p-4 flex flex-wrap items-center justify-between">
@@ -44,13 +49,15 @@ export default function NavBar() {
           id="navbar-default"
           className={`${isOpen ? 'block' : 'hidden'} w-full lg:flex lg:w-auto`}
         >
-          <ul className="flex flex-col mt-4 space-y-2 border border-gray-100 rounded-lg bg-gray-50 p-4 lg:flex-row lg:space-x-8 lg:space-y-0 lg:border-0 lg:bg-white">
+
+          {token ? <ul className="flex flex-col mt-4 space-y-2 border border-gray-100 rounded-lg bg-gray-50 p-4 lg:flex-row lg:space-x-8 lg:space-y-0 lg:border-0 lg:bg-white">
             <li><NavLink to="/" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Home</NavLink></li>
-            <li><NavLink to="/cart" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Cart</NavLink></li>
+            <li><NavLink to="/cart" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Cart </NavLink> </li>
             <li><NavLink to="/products" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Products</NavLink></li>
             <li><NavLink to="/categories" className="block py-2 px-3 text-gray-900 hover:text-blue-700 " >Categories</NavLink></li>
             <li><NavLink to="/brands" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Brands</NavLink></li>
-          </ul>
+          </ul> : ''}
+        
         </div>
 
         {/* Social & Auth Links */}
@@ -64,9 +71,13 @@ export default function NavBar() {
             <li><i className="fa-brands fa-youtube"></i></li>
           </ul>
           <ul className="flex gap-2 text-blue-700 font-semibold">
-            <li><NavLink to="/register">Register</NavLink></li>
+            {token ?   <li><NavLink to="/logout">SignOut</NavLink></li>
+            : <>
+             <li><NavLink to="/register">Register</NavLink></li>
             <li><NavLink to="/login">Login</NavLink></li>
-            <li><NavLink to="/logout">SignOut</NavLink></li>
+            </>}
+           
+          
           </ul>
         </div>
 
