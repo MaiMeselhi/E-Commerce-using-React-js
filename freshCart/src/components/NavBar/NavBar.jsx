@@ -1,12 +1,21 @@
 import React, { useContext, useState } from 'react';
 import logo from '../../assets/images/freshcart-logo.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigation } from 'react-router-dom';
 import {counterContext} from '../Context/CounterContext'
 import { tokenContext } from '../Context/TokenContext';
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   let x =useContext(counterContext)
-  let {token} = useContext(tokenContext)
+  let {token,setToken} = useContext(tokenContext)
+  let navigate = useNavigation ()
+  function logOut (){
+    //remove from localStorage 
+    localStorage.removeItem ("userToken")
+    // set Token null 
+    setToken (null)
+    //navigate to login 
+    navigate ("/login")
+  }
   console.log(token , "token from Navbar");
   
   console.log(x,"context")
@@ -71,7 +80,7 @@ export default function NavBar() {
             <li><i className="fa-brands fa-youtube"></i></li>
           </ul>
           <ul className="flex gap-2 text-blue-700 font-semibold">
-            {token ?   <li><NavLink to="/logout">SignOut</NavLink></li>
+            {token ?   <li><span onClick={logOut}> SignOut </span></li>
             : <>
              <li><NavLink to="/register">Register</NavLink></li>
             <li><NavLink to="/login">Login</NavLink></li>
