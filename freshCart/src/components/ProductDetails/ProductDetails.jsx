@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import styles from "./ProductDetails.module.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import RelatedProducts from "./components/RelatedProducts/RelatedProducts";
 
 export default function ProductDetails() {
-  const { id } = useParams();
+  const { id, categoryId} = useParams();
   const [details, setDetails] = useState(null);
 
   function getProductDetails() {
     axios
       .get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
       .then(({ data }) => {
+   
+        
         setDetails(data.data);
       })
       .catch((err) => {
@@ -25,6 +28,7 @@ export default function ProductDetails() {
   if (!details) return <div className="text-center py-10 text-gray-500">Loading product...</div>;
 
   return (
+  <>
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row gap-8 bg-white p-6 rounded-xl shadow-lg">
         {/* Product Image */}
@@ -65,5 +69,9 @@ export default function ProductDetails() {
         </div>
       </div>
     </div>
+    {/* Related Products*/}
+    <h2 className="text-4xl bg-gradient ">Related Products</h2>
+    <RelatedProducts categoryId={categoryId}/>
+  </>
   );
 }

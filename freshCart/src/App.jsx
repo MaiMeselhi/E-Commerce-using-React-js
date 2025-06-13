@@ -30,7 +30,7 @@ const routes = createBrowserRouter([
    {path:"categories",element: <ProtectedRoutes><Categories/></ProtectedRoutes>},
    {path:"brands", element :<ProtectedRoutes><Brands/></ProtectedRoutes>},
    {path:"cart", element:<ProtectedRoutes><Cart/></ProtectedRoutes>},
-   {path:"productDetails/:id", element:<ProtectedRoutes><ProductDetails/></ProtectedRoutes>},
+   {path:"productDetails/:id/:categoryId", element:<ProtectedRoutes><ProductDetails/></ProtectedRoutes>},
    {path:"products", element:<ProtectedRoutes><Products/></ProtectedRoutes>},
    {path:"login",element:<AuthView><Login/></AuthView>},
    {path:"register", element:<AuthView><Register/></AuthView>},
