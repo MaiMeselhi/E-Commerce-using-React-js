@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductItem.module.css'
+import { Link } from 'react-router-dom'
 
 export default function ProductItem(props) {
-  let {imageCover,title,category,price,ratingsAverage} = props.product
+  let {imageCover,title,category,price,ratingsAverage,id} = props.product
   useEffect
   return (
-   <div className="w-1/6 gap-3">
+   <div className="md:w-1/2 lg:w-1/6 gap-3">
      <div className="bg-white rounded-xl shadow-md p-4 h-full flex flex-col">
-        
+        <Link to= {`/productDetails/${id}`} >
+
         {/* Product Image */}
         <img
           src={imageCover}
@@ -30,6 +32,7 @@ export default function ProductItem(props) {
             <span>{ratingsAverage?.toFixed(1)}</span>
           </div>
         </div>
+        </Link>
   {/* Add to Cart Button */}
         <button className="mt-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
           Add To Cart

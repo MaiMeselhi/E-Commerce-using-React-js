@@ -21,7 +21,7 @@ let [products,setProducts] = useState([])
     getProducts();
   }, [])
   return (
-    <div className='flex flex-wrap gap-y-3 mb-8 w-25'>
+    <div className='md:flex flex-wrap gap-y-3 mb-8 w-25'>
       {products.map(product => <ProductItem product={product}/> )}
     </div>
   )
