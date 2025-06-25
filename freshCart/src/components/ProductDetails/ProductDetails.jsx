@@ -3,6 +3,7 @@ import styles from "./ProductDetails.module.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import RelatedProducts from "./components/RelatedProducts/RelatedProducts";
+import Slider from "react-slick";
 
 export default function ProductDetails() {
   const { id, categoryId} = useParams();
@@ -23,21 +24,32 @@ export default function ProductDetails() {
 
   useEffect(() => {
     getProductDetails();
-  }, []);
+  }, [id]);
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+  };
   if (!details) return <div className="text-center py-10 text-gray-500">Loading product...</div>;
 
   return (
   <>
+  
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row gap-8 bg-white p-6 rounded-xl shadow-lg">
         {/* Product Image */}
         <div className="md:w-1/2">
-          <img
-            src={details?.imageCover}
+         <Slider {...settings}>
+          {details?.images.map(src =>  <img
+            src={src}
             alt={details?.title}
-            className="w-full h-80 object-cover rounded-xl shadow-sm hover:scale-105 transition-transform duration-300"
-          />
+            className="w-25 m-auto h-80 object-cover rounded-xl shadow-sm hover:scale-105 transition-transform duration-300"
+          /> )}
+        </Slider>
+        
         </div>
 
         {/* Product Info */}

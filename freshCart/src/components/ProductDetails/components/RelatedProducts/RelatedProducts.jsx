@@ -7,7 +7,7 @@ export default function RelatedProducts(props) {
   let {categoryId }= props
   console.log(categoryId);
   const [relatedProducts, setRelatedProducts] = useState([])
-  
+   
   function getProducts () {
     axios.get(`https://ecommerce.routemisr.com/api/v1/products`)
     .then (({data})=> {
