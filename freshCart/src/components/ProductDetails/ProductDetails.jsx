@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import RelatedProducts from "./components/RelatedProducts/RelatedProducts";
 import Slider from "react-slick";
-import { cartContext } from '../../components/Context/CartContext '
+import { cartContext } from "../Context/CartContext";
+import { toast } from "react-toastify";
 
 
 
@@ -23,8 +24,12 @@ export default function ProductDetails() {
         console.log(err);
       });
   }
-  function addProductToCart(id) {
-    addToCart(id);
+  async function addProductToCart (id){
+    let data = await addToCart(id)
+    if(data.status == "success"){
+toast("Product added sucessfully", {position:'top-right',theme:"dark",type:"success"});
+    }
+
   }
   useEffect(() => {
     getProductDetails();

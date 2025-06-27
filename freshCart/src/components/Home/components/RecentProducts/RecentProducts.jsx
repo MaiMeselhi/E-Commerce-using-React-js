@@ -3,7 +3,9 @@ import styles from './RecentProducts.module.css'
 import axios from 'axios'
 import ProductItem from '../../../shared/ProductItem/ProductItem'
 import {ClipLoader} from 'react-spinners'
-import { cartContext } from '../../../Context/CartContext'
+import { cartContext } from "../../../Context/CartContext";
+  import {toast} from 'react-toastify';
+
 
 
 export default function RecentProducts() {
@@ -22,8 +24,11 @@ let {addToCart} = useContext(cartContext)
     })
   }
 
-  function addProductToCart (id){
-    addToCart(id)
+  async function addProductToCart (id){
+    let data = await addToCart(id)
+    if(data.status == "success"){
+toast("Product added sucessfully", {position:'bottom-right',theme:"dark",type:"success"});
+    }
 
   }
   useEffect(() => {

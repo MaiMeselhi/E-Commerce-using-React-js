@@ -14,6 +14,8 @@ import NotFound from './components/NotFound/NotFound'
 import { tokenContext } from './components/Context/TokenContext';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import AuthView from './components/AuthView/AuthView';
+  import { ToastContainer } from 'react-toastify';
+
 import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
@@ -42,6 +44,8 @@ const routes = createBrowserRouter([
   return (
     <>
     <RouterProvider router={routes}></RouterProvider>
+            <ToastContainer />
+
         
     </>
   )
