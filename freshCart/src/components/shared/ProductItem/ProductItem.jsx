@@ -36,7 +36,7 @@ export default function ProductItem(props) {
           </div>
         </Link>
         {/* Add to Cart Button */}
-        <button className="mt-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+        <button onClick={()=> props.addProductToCart(id)} className="mt-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
           Add To Cart
         </button>{" "}
       </div>
