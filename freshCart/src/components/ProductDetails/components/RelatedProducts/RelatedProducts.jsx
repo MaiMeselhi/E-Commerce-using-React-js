@@ -5,15 +5,12 @@ import ProductItem from '../../../shared/ProductItem/ProductItem'
 
 export default function RelatedProducts(props) {
   let {categoryId }= props
-  console.log(categoryId);
   const [relatedProducts, setRelatedProducts] = useState([])
    
   function getProducts () {
     axios.get(`https://ecommerce.routemisr.com/api/v1/products`)
     .then (({data})=> {
-      console.log(data.data)
       let res =data.data.filter(product => product.category._id == categoryId)
-      console.log(res);
       setRelatedProducts(res)
       
     })

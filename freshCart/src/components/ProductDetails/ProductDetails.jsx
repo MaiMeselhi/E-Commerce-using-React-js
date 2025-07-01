@@ -27,7 +27,7 @@ export default function ProductDetails() {
   async function addProductToCart (id){
     let data = await addToCart(id)
     if(data.status == "success"){
-toast("Product added sucessfully", {position:'top-right',theme:"dark",type:"success"});
+toast("Product added sucessfully", {position:'bottom-right',theme:"dark",type:"success"});
     }
 
   }

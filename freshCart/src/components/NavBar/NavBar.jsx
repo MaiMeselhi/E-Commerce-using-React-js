@@ -3,10 +3,12 @@ import logo from '../../assets/images/freshcart-logo.svg';
 import { NavLink, useNavigation } from 'react-router-dom';
 import {counterContext} from '../Context/CounterContext'
 import { tokenContext } from '../Context/TokenContext';
+import { cartContext } from '../Context/CartContext';
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   let x =useContext(counterContext)
   let {token,setToken} = useContext(tokenContext)
+  let {numOfCartItems} =useContext(cartContext)
   let navigate = useNavigation ()
   function logOut (){
     //remove from localStorage 
@@ -61,7 +63,7 @@ export default function NavBar() {
 
           {token ? <ul className="flex flex-col mt-4 space-y-2 border border-gray-100 rounded-lg bg-gray-50 p-4 lg:flex-row lg:space-x-8 lg:space-y-0 lg:border-0 lg:bg-white">
             <li><NavLink to="/" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Home</NavLink></li>
-            <li><NavLink to="/cart" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Cart </NavLink> </li>
+            <li><NavLink to="/cart" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Cart {numOfCartItems}</NavLink> </li>
             <li><NavLink to="/products" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Products</NavLink></li>
             <li><NavLink to="/categories" className="block py-2 px-3 text-gray-900 hover:text-blue-700 " >Categories</NavLink></li>
             <li><NavLink to="/brands" className="block py-2 px-3 text-gray-900 hover:text-blue-700 ">Brands</NavLink></li>
