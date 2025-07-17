@@ -18,7 +18,8 @@ export default function CartContextProvider({children}) {
         const {data} = await axios.post(API_URL,{productId},{headers});
         if(data.status == "success"){
           setNumOfCartItems(data.numOfCartItems)
-          console.log(numOfCartItems);
+          await getCart();
+         
           
         }
         return data;
@@ -49,11 +50,23 @@ export default function CartContextProvider({children}) {
         return data;
   
     }
+     async function updateCount(id,count) {
+    const {data} = await axios.put(`${API_URL}/${id}`,{count},{headers});
+    console.log(data,"from remove function");
+    
+        if(data.status == "success"){
+          setNumOfCartItems(data.numOfCartItems)
+          
+        }
+        setCartDetails(data)
+        return data;
+  
+    }
     useEffect(() => {
 token && getCart();
 },[token])
   return (
-  <cartContext.Provider value={{numOfCartItems,setNumOfCartItems,addToCart,getCart,cartDetails,removeProduct}}>
+  <cartContext.Provider value={{numOfCartItems,setNumOfCartItems,addToCart,getCart,cartDetails,setCartDetails,removeProduct,updateCount}}>
     {children}
     </cartContext.Provider>
   )
