@@ -18,9 +18,7 @@ export default function NavBar() {
     //navigate to login 
     navigate ("/login")
   }
-  console.log(token , "token from Navbar");
   
-  console.log(x,"context")
   return (
     <nav className="bg-white border-gray-200">
       <div className="max-w-screen-xl mx-auto p-4 flex flex-wrap items-center justify-between">

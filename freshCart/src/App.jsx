@@ -10,6 +10,7 @@ import Products from './components/Products/Products'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import Cart from './components/Cart/Cart'
+import Checkout from './components/Checkout/Checkout'
 import NotFound from './components/NotFound/NotFound'
 import { tokenContext } from './components/Context/TokenContext';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
@@ -34,6 +35,8 @@ const routes = createBrowserRouter([
    {path:"cart", element:<ProtectedRoutes><Cart/></ProtectedRoutes>},
    {path:"productDetails/:id/:categoryId", element:<ProtectedRoutes><ProductDetails/></ProtectedRoutes>},
    {path:"products", element:<ProtectedRoutes><Products/></ProtectedRoutes>},
+      {path:"checkout", element:<ProtectedRoutes><Checkout/></ProtectedRoutes>},
+
    {path:"login",element:<AuthView><Login/></AuthView>},
    {path:"register", element:<AuthView><Register/></AuthView>},
    {path:"*" , element :<NotFound/>}

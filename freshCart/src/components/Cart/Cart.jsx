@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import styles from "./Cart.module.css";
+import React, { useContext, useEffect } from "react";
 import { cartContext } from "../Context/CartContext";
-import { tokenContext } from "../Context/TokenContext";
+import { Link } from "react-router-dom";
+
 
 export default function Cart() {
   const { cartDetails, removeProduct, updateCount} = useContext(cartContext);
@@ -137,6 +137,9 @@ export default function Cart() {
           </div>
         )
       ) : null}
+<Link to={'/checkout'} className="  px-6 py-3 my-3 overflow-hidden font-semibold text-black bg-green from-purple-500 to-pink-500 rounded-2xl shadow-xl transition duration-300 ease-in-out hover:scale-105 hover:from-pink-500 hover:to-purple-500 group block text-center">
+ Checkout
+</Link>
     </>
   );
 }

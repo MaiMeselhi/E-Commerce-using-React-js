@@ -9,8 +9,10 @@ import { tokenContext } from "./TokenContext";
 export default function CartContextProvider({children}) {
     const{token} =useContext(tokenContext)
     const [numOfCartItems,setNumOfCartItems]= useState(0)
+    const [cartId,setCartId]= useState('')
     const [cartDetails,setCartDetails] =useState(null)
     const API_URL = `https://ecommerce.routemisr.com/api/v1/cart`
+    const ORDER_API_URL =`https://ecommerce.routemisr.com/api/v1/orders`
     const headers ={
         token
     }
@@ -28,12 +30,11 @@ export default function CartContextProvider({children}) {
     }
     async function getCart (){
       const{data} =await axios.get(API_URL,{headers})
-      console.log(data);
       if(data.status == "success"){
           setNumOfCartItems(data.numOfCartItems)
-          console.log(numOfCartItems);
           
         }
+        setCartId(data.cartId)
         setCartDetails(data)
       return data;
     }
@@ -50,7 +51,8 @@ export default function CartContextProvider({children}) {
         return data;
   
     }
-     async function updateCount(id,count) {
+     
+    async function updateCount(id,count) {
     const {data} = await axios.put(`${API_URL}/${id}`,{count},{headers});
     console.log(data,"from remove function");
     
@@ -62,11 +64,20 @@ export default function CartContextProvider({children}) {
         return data;
   
     }
+        async function cashOnDelivery(shippingAdress) {
+    const {data} = await axios.post(`${ORDER_API_URL}/${cartId}`,{shippingAdress},{headers});
+    if(data.message == 'success'){
+      getCart()
+    }
+        return data;
+     
+  
+    }
     useEffect(() => {
 token && getCart();
 },[token])
   return (
-  <cartContext.Provider value={{numOfCartItems,setNumOfCartItems,addToCart,getCart,cartDetails,setCartDetails,removeProduct,updateCount}}>
+  <cartContext.Provider value={{numOfCartItems,setNumOfCartItems,addToCart,getCart,cartDetails,setCartDetails,removeProduct,updateCount,cashOnDelivery}}>
     {children}
     </cartContext.Provider>
   )
