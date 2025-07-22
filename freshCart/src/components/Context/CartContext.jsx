@@ -13,6 +13,7 @@ export default function CartContextProvider({children}) {
     const [cartDetails,setCartDetails] =useState(null)
     const API_URL = `https://ecommerce.routemisr.com/api/v1/cart`
     const ORDER_API_URL =`https://ecommerce.routemisr.com/api/v1/orders`
+    const ONLINE_PAYMENT_API_URL =`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:5173`
     const headers ={
         token
     }
@@ -73,11 +74,22 @@ export default function CartContextProvider({children}) {
      
   
     }
+       
+    async function onlinePayment(shippingAdress) {
+    const {data} = await axios.post(`${ONLINE_PAYMENT_API_URL}`,{shippingAdress},{headers});
+    if(data.message == 'success'){
+      getCart()
+    }
+        return data;
+     
+  
+    }
     useEffect(() => {
 token && getCart();
 },[token])
+
   return (
-  <cartContext.Provider value={{numOfCartItems,setNumOfCartItems,addToCart,getCart,cartDetails,setCartDetails,removeProduct,updateCount,cashOnDelivery}}>
+  <cartContext.Provider value={{numOfCartItems,setNumOfCartItems,addToCart,getCart,cartDetails,setCartDetails,removeProduct,updateCount,cashOnDelivery,onlinePayment}}>
     {children}
     </cartContext.Provider>
   )

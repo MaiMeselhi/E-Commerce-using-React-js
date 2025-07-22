@@ -16,7 +16,7 @@ import { tokenContext } from './components/Context/TokenContext';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import AuthView from './components/AuthView/AuthView';
   import { ToastContainer } from 'react-toastify';
-
+import AllOrders from './components/AllOrders/AllOrders'
 import ProductDetails from './components/ProductDetails/ProductDetails';
 
 
@@ -36,6 +36,7 @@ const routes = createBrowserRouter([
    {path:"productDetails/:id/:categoryId", element:<ProtectedRoutes><ProductDetails/></ProtectedRoutes>},
    {path:"products", element:<ProtectedRoutes><Products/></ProtectedRoutes>},
       {path:"checkout", element:<ProtectedRoutes><Checkout/></ProtectedRoutes>},
+      {path:"allorders", element:<ProtectedRoutes><AllOrders/></ProtectedRoutes>},
 
    {path:"login",element:<AuthView><Login/></AuthView>},
    {path:"register", element:<AuthView><Register/></AuthView>},
